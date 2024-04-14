@@ -1,0 +1,92 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Bucket List</title>
+    <link rel="stylesheet" href="{%static 'bootstrap.min.css'%}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Mobile Bucket</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home
+                            <span class="visually-hidden">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-3 mx-auto mt-5">
+                <form method="post" action="{% url 'hello' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="form-floating mb-3">
+                            <input class="form-control form-control-sm" name="url" type="text"
+                                placeholder=".form-control-sm">
+                        </div>
+                        <input class="btn btn-secondary my-2 my-sm-0 mx-auto d-block" type="submit"
+                            value="Add New Phone">
+                    </div>
+                </form>
+                {% if add %}
+                <div class="mt-2"></div>
+                <div class="mt-2"></div>
+                <div class="alert alert-dismissible alert-secondary">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>Well done!</strong> You Added New Product</a>.
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+        <div class="row mt-5">
+            {% for mobile in mobiles %}
+            <div class="col-4">
+
+                <div class="card text-white bg-primary mb-3 h-100">
+                    <div class="card-header">Only : {{ mobile.price }}</div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ mobile.title }}</h4>
+                        <img style="height: 200px;object-fit: contain;margin: 10px;" src="{{ mobile.image_url }}"
+                            alt="{{ mobile.title }}">
+                        <p class="card-text">
+                            {{ mobile.description |linebreaks }}
+                        </p>
+                        <form method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-outline-danger" type="submit" name="delete" value="{{ mobile.id }}">Delete</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    </div>
+
+</body>
+
+</html>

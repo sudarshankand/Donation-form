@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donation Form</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f0f0; /* Modern background color */
+        }
+        .container {
+            margin-top: 50px; /* Adjust margin-top for vertical alignment */
+        }
+    </style>
+</head>
+<center>
+<img src="{% static 'logo.jpeg' %}" alt="Logo" height="318" width="413">
+</center>
+<body>
+    <div class="container">
+        <center>
+            <div class="mission-vision-section">
+                    <h2>Our Mission and Vision</h2>
+                    <p><strong>Mission:</strong> To collect and distribute clothing, and educational materials to individuals and families in underserved communities.</p>
+                    <p><strong>Vision:</strong> To create a world where every person has access to the basic necessities and tools for personal growth and success.</p>
+                    <p><strong>Need:</strong> Countless families lack access to basic necessities. Cycles of poverty and inequality persist.</p>
+            </div>
+        </center>
+        <center>
+            <img src="{% static 'bg photo.jpeg' %}" alt="Logo" height="318" width="1003">
+        </center>
+        <div class="row my-5">
+            <div class="col-md-6 mx-auto">
+                
+                <h1>Person Donation Form</h1>
+    
+       
+                <form method="post" class="mt-4">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <input type="text" name="name" id="name" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone_number" class="col-form-label">Phone Number:</label>
+                        <input type="text" name="phone_number" id="phone_number" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address" class="col-form-label">Address:</label>
+                        <textarea name="address" id="address" class="form-control"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="col-form-label">Email:</label>
+                        <input type="email" name="email" id="email" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="what_to_donate" class="col-form-label">What to Donate:</label>
+                        <select name="what_to_donate" id="what_to_donate" class="form-control">
+                            <option value="clothes">Clothes</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date" class="col-form-label">Date:</label>
+                        <input type="date" name="date" id="date" class="form-control">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+   
+</body>
+</html>
